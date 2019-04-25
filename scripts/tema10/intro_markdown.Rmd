@@ -1,0 +1,102 @@
+---
+title: "introduccion a markdown"
+author: "christian arcos"
+date: "April 24, 2019"
+output:
+  html_document: null
+  pdf_document: default
+  theme: cosmo
+  toc: no
+---
+***
+```{r}
+library(htmlTable)
+library(knitr)
+library(kableExtra)
+```
+
+
+
+## R Markdown
+
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+#HTML Contents
+<http://christianArcos.com>
+
+<p> esto es un nuevo parrafo escrito con etiquetas de HTML</p>
+
+<table border=1>
+<th>Ventajas</th>
+<th>Inconcenientes</th>
+<tr>
+<td>es facil de utilizar</td>
+<td>necesita precision y planning</td>
+</tr>
+<tr>
+<td>puede exportara multiples formatos</td>
+<td>necesitamos conocer otras tecnologias</td>
+</tr>
+</table>
+
+# incrustar codigo
+Se puede definir cualquier codigo en *R* haciedno uso de los tres acentos agudos. El paramtero echo=FALSE, indica que el chunk no se mostrara en el documento. 
+
+* Tambien se pueden definir las opciones de mostrar o no los chunks de forma global en todo el documento. 
+* Tambien se puede definir una cache global para no sobrecargar la generacion de ficheros
+* se puede definir el directorio rais de donde cargar cualquier fichero de datos haciendo uso de l parametro root.dir
+    + hola
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(root.dir = "../../data/tema10")
+```
+
+##Loading Data
+```{r loadingData, echo=T}
+auto <- read.csv("../../data/tema10/auto-mpg.csv")
+
+```
+
+Despues de cargar los datos solemos mirar informacion acerca de los primeros elementos del data frame, la estructura de las columnas del mismo e incluso un resumen de los estadisticos basicos de cada una
+
+```{r}
+htmlTable(head(auto),
+          caption = "tabla con las primeras entradas del data set auto",
+          tfoot = "&dagger; Esto podria ser un comentario acerca de la tabla",
+          col.rgroup = c("none","#F7F7F7"),
+          col.columns = c("none",rep("#F55555",7), "#5555F5"))
+                                     
+kable(head(auto), format = "html") %>%
+  kable_styling(bootstrap_options = c("striped","hover","condensed"),
+                full_width = F) %>%
+  column_spec(1,bold = T, border_right = T)%>%
+  column_spec(9,width = "15em", background = "blue")%>%
+  row_spec(3:4,bold = T,color = "white", background = "gray")%>%
+  row_spec(0,angle = 45)
+  
+str(auto)
+summary(auto)
+```
+
+
+### Plot data
+
+You can also embed plots, for example:
+
+```{r disperssion, echo=FALSE, fig.height=6, fig.width=9}
+plot(auto$mpg~auto$weight)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+### Inline R
+hemos hecho uso de un data frame que contiene `r nrow(auto)` muestras de coches y cada uno de ellos tiene `r ncol(auto)` variables.

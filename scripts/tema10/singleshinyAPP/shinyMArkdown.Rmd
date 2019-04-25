@@ -1,0 +1,17 @@
+---
+title: "shinyandMarkdown"
+author: "christian arcos"
+date: "April 25, 2019"
+output: html_document
+---
+
+# Esto es una web APP de Shiny
+```{r, include=FALSE}
+library(knitr)
+library(webshot)
+knitr::include_app("http://127.0.0.1:3525")
+```
+
+## R Markdown
+
+
