@@ -3,10 +3,10 @@ library(twitteR)
 library(igraph)
 library(dplyr)
 
-api_key <- "zqTa9C4Q3HTUyRh9Es9StretZ"
-api_secret <- "WMHmFEflKjoJ9HdFYmedveB82BJguXvTmhcWIkBv31gSSYY8Qo"
-access_token <- "239854124-MlEwZl5nD11CZGj69MXEhrzms3nQMEpoaF1CbUmy"
-acces_token_secret <- "yOIw6POSdp6yJRd8L6aCDgfhcZ4yTX45vNPEPfqzgxxol"
+api_key <- ""
+api_secret <- ""
+access_token <- ""
+acces_token_secret <- ""
 
 setup_twitter_oauth(api_key, api_secret,access_token, acces_token_secret)
 
